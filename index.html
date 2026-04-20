@@ -1,41 +1,85 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="id">
 <head>
-  <title>STATE GOVERNMENT</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State Government</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-
-<header>
-  <img src="img/San Andreas State Government.png" alt="STATE GOVERNMENT" width="100" height="auto"><h1>STATE GOVERNMENT</h1>
-  <p>Public Services</p>
-</header>
-
-<nav>
-  <a href="index.html">Beranda</a>
-  <a href="profil.html">Profil</a>
-  <a href="layanan.html">Layanan</a>
-  <a href="berita.html">Berita</a>
-  <a href="kontak.html">Kontak</a>
-</nav>
-
-<div class="container">
-  <div class="card">
-    <h2>Welcome</h2>
-    <p>The State Side Government Website.</p>
-  </div>
-  <div class="container">
-  <div class="card">
-    <h2>PEMILIHAN UMUM</h2>
-    <p>Berikut Perolehan Suara In Game:<br>Candidate 01 Mendapat 6 Suara<br>Candidate 02 Mendapat 33 Suara<br>Candidate 03 Mendapat 26 Suara<br>Candidate 04 Mendapat 3 Suara</p>
-    <p>Berikut Perolehan Suara Melalui Web:<br>Candidate 01 Mendapat 14 Suara<br>Candidate 02 Mendapat 165 Suara<br>Candidate 03 Mendapat 196 Suara<br>Candidate 04 Mendapat 3 Suara</p>
-    <p>Data Semua Suara Terkumpul:<br>Candidate 01 Mendapat 20 Suara<br>Candidate 02 Mendapat 198 Suara<br>Candidate 03 Mendapat 222 Suara<br>Candidate 04 Mendapat 6 Suara</p>
-  </div>
-  </div>
-
-<footer>
-  <p>© 2026 STATE GOVERNMENT</p>
-</footer>
-
-</body>
-</html>
+<body class="bg-gray-100 font-sans">  <!-- Navbar -->  <nav class="bg-blue-800 text-white p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">StateGov</h1>
+      <ul class="flex gap-6">
+        <li><a href="#" class="hover:underline">Home</a></li>
+        <li><a href="#profil" class="hover:underline">Profil</a></li>
+        <li><a href="#services" class="hover:underline">Services</a></li>
+        <li><a href="#berita" class="hover:underline">Berita</a></li>
+        <li><a href="#contact" class="hover:underline">Contact</a></li>
+      </ul>
+    </div>
+  </nav>  <!-- Hero Section -->  <section class="bg-blue-600 text-white py-16 text-center">
+    <h2 class="text-4xl font-bold mb-4">Welcome to State Government</h2>
+    <p class="text-lg">Providing transparent and efficient public services</p>
+  </section>  <!-- Profil Pemerintah -->  <section id="profil" class="container mx-auto py-12">
+    <h3 class="text-2xl font-bold text-center mb-8">Profil Pemerintah</h3>
+    <div class="bg-white p-6 rounded-2xl shadow max-w-3xl mx-auto text-center">
+      <p class="mb-4">State Government adalah lembaga yang bertugas memberikan pelayanan publik, menjaga transparansi, dan meningkatkan kesejahteraan masyarakat.</p>
+      <p class="mb-4">Visi: Menjadi pemerintah yang transparan, modern, dan terpercaya.</p>
+      <p>Misi: Memberikan layanan publik yang cepat, tepat, dan berbasis digital.</p>
+    </div>
+  </section>  <!-- Services -->  <section id="services" class="container mx-auto py-12">
+    <h3 class="text-2xl font-bold text-center mb-8">Our Services</h3>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h4 class="font-bold text-lg mb-2">Public Services</h4>
+        <p>Access essential government services easily.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h4 class="font-bold text-lg mb-2">Documents</h4>
+        <p>Manage your official documents online.</p>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow">
+        <h4 class="font-bold text-lg mb-2">Complaints</h4>
+        <p>Submit feedback and complaints digitally.</p>
+      </div>
+    </div>
+  </section>  <!-- Berita -->  <section id="berita" class="bg-gray-50 py-12">
+    <div class="container mx-auto">
+      <h3 class="text-2xl font-bold text-center mb-8">Berita Terbaru</h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl shadow overflow-hidden">
+          <img src="https://source.unsplash.com/400x200/?government" class="w-full" />
+          <div class="p-4">
+            <h4 class="font-bold mb-2">Peluncuran Layanan Digital</h4>
+            <p class="text-sm">Pemerintah meluncurkan layanan digital baru untuk mempermudah masyarakat.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow overflow-hidden">
+          <img src="https://source.unsplash.com/400x200/?city" class="w-full" />
+          <div class="p-4">
+            <h4 class="font-bold mb-2">Pembangunan Infrastruktur</h4>
+            <p class="text-sm">Proyek pembangunan infrastruktur terus berjalan untuk meningkatkan konektivitas.</p>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl shadow overflow-hidden">
+          <img src="https://source.unsplash.com/400x200/?meeting" class="w-full" />
+          <div class="p-4">
+            <h4 class="font-bold mb-2">Rapat Kebijakan Publik</h4>
+            <p class="text-sm">Diskusi kebijakan publik dilakukan untuk meningkatkan kesejahteraan masyarakat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  <!-- Contact -->  <section id="contact" class="bg-white py-12">
+    <div class="container mx-auto max-w-xl">
+      <h3 class="text-2xl font-bold text-center mb-6">Contact Us</h3>
+      <form class="space-y-4">
+        <input type="text" placeholder="Your Name" class="w-full p-3 border rounded-lg" />
+        <input type="email" placeholder="Your Email" class="w-full p-3 border rounded-lg" />
+        <textarea placeholder="Your Message" class="w-full p-3 border rounded-lg"></textarea>
+        <button class="bg-blue-700 text-white px-6 py-3 rounded-lg w-full">Send Message</button>
+      </form>
+    </div>
+  </section>  <!-- Footer -->  <footer class="bg-blue-900 text-white text-center p-4">
+    <p>&copy; 2026 State Government. All rights reserved.</p>
+  </footer></body>
+        </html>
