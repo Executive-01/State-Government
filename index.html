@@ -1,105 +1,34 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>State Government</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <style>
-    .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
-    .fade-in.show { opacity: 1; transform: translateY(0); }
-  </style>
+  <title>STATE GOVERNMENT</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">  <!-- Navbar -->  <nav class="bg-white border-b">
-    <div class="container mx-auto flex justify-between items-center p-4">
-      <h1 class="text-lg font-semibold">StateGov</h1>
-      <button id="menuBtn" class="md:hidden">
-        <i data-lucide="menu"></i>
-      </button>
-      <ul id="menu" class="hidden absolute top-16 left-0 w-full bg-white border-t md:static md:flex md:gap-6 md:border-none md:w-auto">
-        <li><a href="#" class="block p-3 hover:bg-gray-100 md:hover:bg-transparent">Home</a></li>
-        <li><a href="#profil" class="block p-3">Profil</a></li>
-        <li><a href="#services" class="block p-3">Services</a></li>
-        <li><a href="#berita" class="block p-3">Berita</a></li>
-        <li><a href="#contact" class="block p-3">Contact</a></li>
-      </ul>
-    </div>
-  </nav>  <!-- Hero -->  <section class="py-12 text-center px-4 fade-in">
-    <h2 class="text-2xl md:text-4xl font-bold mb-3">Portal Pemerintah</h2>
-    <p class="text-gray-600">Layanan publik modern</p>
-  </section>  <!-- Profil -->  <section id="profil" class="container mx-auto px-4 py-10 fade-in">
-    <h3 class="text-xl font-semibold mb-4 flex gap-2"><i data-lucide="building"></i> Profil</h3>
-    <div class="bg-white p-5 rounded-xl border">
-      <p class="text-sm">Pemerintah melayani masyarakat secara transparan dan digital.</p>
-    </div>
-  </section>  <!-- Services -->  <section id="services" class="container mx-auto px-4 py-10 fade-in">
-    <h3 class="text-xl font-semibold mb-6 flex gap-2"><i data-lucide="briefcase"></i> Layanan</h3>
-    <div class="grid gap-4 md:grid-cols-3">
-      <div class="bg-white p-4 rounded-xl border hover:shadow hover:-translate-y-1 transition">
-        <i data-lucide="users"></i>
-        <h4>Layanan Publik</h4>
-      </div>
-      <div class="bg-white p-4 rounded-xl border hover:shadow hover:-translate-y-1 transition">
-        <i data-lucide="file-text"></i>
-        <h4>Dokumen</h4>
-      </div>
-      <div class="bg-white p-4 rounded-xl border hover:shadow hover:-translate-y-1 transition">
-        <i data-lucide="message-square"></i>
-        <h4>Pengaduan</h4>
-      </div>
-    </div>
-  </section>  <!-- Berita -->  <section id="berita" class="container mx-auto px-4 py-10 fade-in">
-    <h3 class="text-xl font-semibold mb-6 flex gap-2"><i data-lucide="newspaper"></i> Berita</h3>
-    <div class="grid gap-4 md:grid-cols-3">
-      <div onclick="openDetail('Judul 1','Isi lengkap berita 1...')" class="cursor-pointer bg-white border rounded-xl overflow-hidden hover:shadow transition">
-        <img src="https://source.unsplash.com/400x200/?city" class="w-full h-40 object-cover" />
-        <div class="p-4"><h4 class="text-sm font-medium">Judul 1</h4></div>
-      </div>
-      <div onclick="openDetail('Judul 2','Isi lengkap berita 2...')" class="cursor-pointer bg-white border rounded-xl overflow-hidden hover:shadow transition">
-        <img src="https://source.unsplash.com/400x200/?meeting" class="w-full h-40 object-cover" />
-        <div class="p-4"><h4 class="text-sm font-medium">Judul 2</h4></div>
-      </div>
-      <div onclick="openDetail('Judul 3','Isi lengkap berita 3...')" class="cursor-pointer bg-white border rounded-xl overflow-hidden hover:shadow transition">
-        <img src="https://source.unsplash.com/400x200/?government" class="w-full h-40 object-cover" />
-        <div class="p-4"><h4 class="text-sm font-medium">Judul 3</h4></div>
-      </div>
-    </div>
-  </section>  <!-- Modal Detail Berita -->  <div id="modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center">
-    <div class="bg-white p-6 rounded-xl max-w-lg w-full">
-      <h3 id="modalTitle" class="font-bold mb-2"></h3>
-      <p id="modalContent" class="text-sm"></p>
-      <button onclick="closeModal()" class="mt-4 bg-gray-800 text-white px-4 py-2 rounded">Tutup</button>
-    </div>
-  </div>  <!-- Contact -->  <section id="contact" class="container mx-auto px-4 py-10 fade-in">
-    <h3 class="text-xl font-semibold mb-4 flex gap-2"><i data-lucide="mail"></i> Kontak</h3>
-    <form class="space-y-3 max-w-md">
-      <input class="w-full p-2 border rounded" placeholder="Nama" />
-      <button class="bg-gray-800 text-white px-4 py-2 rounded">Kirim</button>
-    </form>
-  </section>  <footer class="text-center text-sm text-gray-500 py-6">© 2026</footer>  <script>
-    lucide.createIcons();
+<body>
 
-    // navbar toggle
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('menu');
-    btn.onclick = () => menu.classList.toggle('hidden');
+<header>
+  <h1>STATE GOVERNMENT</h1>
+  <p>Service, Honor And Country</p>
+</header>
 
-    // scroll animation
-    const els = document.querySelectorAll('.fade-in');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
-    });
-    els.forEach(el => obs.observe(el));
+<nav>
+  <a href="index.html">Beranda</a>
+  <a href="profil.html">Profil</a>
+  <a href="layanan.html">Layanan</a>
+  <a href="berita.html">Berita</a>
+  <a href="kontak.html">Kontak</a>
+</nav>
 
-    // modal berita
-    function openDetail(title, content) {
-      document.getElementById('modalTitle').innerText = title;
-      document.getElementById('modalContent').innerText = content;
-      document.getElementById('modal').classList.remove('hidden');
-      document.getElementById('modal').classList.add('flex');
-    }
-    function closeModal() {
-      document.getElementById('modal').classList.add('hidden');
-    }
-  </script></body>
+<div class="container">
+  <div class="card">
+    <h2>Welcome To</h2>
+    <p>State Side Government Website.</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 STATE GOVERNMENT</p>
+</footer>
+
+</body>
 </html>
