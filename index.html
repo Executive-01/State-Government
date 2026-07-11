@@ -261,6 +261,16 @@ overflow:auto;
 
 }
 
+#inputDialogInput{
+
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+
+}
+
 @media(max-width:700px){
 
 .toolbar{
@@ -360,6 +370,88 @@ font-size:18px;
 
 }
 
+.notif{
+
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.45);
+z-index:9999;
+justify-content:center;
+align-items:center;
+
+}
+
+
+.notif-box{
+
+background:white;
+width:320px;
+padding:25px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+animation:popup .3s;
+
+}
+
+
+.notif-box h3{
+
+color:#0d6efd;
+margin-bottom:10px;
+
+}
+
+
+.notif-box p{
+
+margin-bottom:20px;
+color:#555;
+
+}
+
+
+.notif-box button{
+
+background:#0d6efd;
+color:white;
+width:100%;
+
+}
+
+.notif-actions{
+	display:flex;
+	gap:10px;
+	margin-top:15px;
+}
+
+.notif-actions button{
+	flex:1;
+	width:auto;
+}
+
+@keyframes popup{
+
+from{
+
+transform:scale(.8);
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+opacity:1;
+
+}
+
+}
+
 </style>
 
 </head>
@@ -368,7 +460,7 @@ font-size:18px;
 
 <div id="loginPage">
 
-<div class="login-box">
+<form id="loginForm" class="login-box" onsubmit="event.preventDefault(); login();">
 
 <h2>LOGIN PANEL</h2>
 
@@ -384,13 +476,65 @@ type="password"
 id="password"
 placeholder="Password">
 
-<button
-class="primary"
-onclick="login()">
+<button type="submit" class="primary">
 
 LOGIN
 
 </button>
+
+</form>
+
+</div>
+
+<div id="notif" class="notif">
+
+<div class="notif-box">
+
+<h3>EXECUTIVE</h3>
+
+<p id="notifText"></p>
+
+<button onclick="tutupNotif()">OK</button>
+
+</div>
+
+</div>
+
+<div id="confirm" class="notif">
+
+<div class="notif-box">
+
+<h3>CONFIRMATION</h3>
+
+<p id="confirmText"></p>
+
+<div class="notif-actions">
+
+<button class="success" onclick="konfirmasiYa()">Ya</button>
+
+<button class="danger" onclick="tutupConfirm()">Batal</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="inputDialog" class="notif">
+
+<div class="notif-box">
+
+<h3 id="inputDialogTitle">INPUT</h3>
+
+<input type="text" id="inputDialogInput" placeholder="Masukkan Keterangan" onkeydown="if(event.key==='Enter'){event.preventDefault(); simpanInputDialog();}">
+
+<div class="notif-actions">
+
+<button class="success" onclick="simpanInputDialog()">Simpan</button>
+
+<button class="danger" onclick="tutupInputDialog()">Batal</button>
+
+</div>
 
 </div>
 
@@ -781,7 +925,7 @@ let nama=document.getElementById("namaBaru").value.trim();
 
 if(nama==""){
 
-alert("Masukkan nama.");
+notifikasi("Masukkan nama.");
 
 return;
 
@@ -808,9 +952,15 @@ tampilkan();
 
 function editAnggota(i){
 
-let nama=prompt("Edit Nama",anggota[i].nama);
+tampilkanInputDialog("Edit Nama", anggota[i].nama, (nama)=>{
 
-if(!nama) return;
+if(!nama){
+
+notifikasi("Nama tidak boleh kosong.");
+
+return;
+
+}
 
 anggota[i].nama=nama.trim();
 
@@ -818,11 +968,13 @@ simpan();
 
 tampilkan();
 
+});
+
 }
 
 function hapusAnggota(i){
 
-if(confirm("Hapus anggota?")){
+tampilkanKonfirmasi("Hapus anggota?",()=>{
 
 anggota.splice(i,1);
 
@@ -830,7 +982,7 @@ simpan();
 
 tampilkan();
 
-}
+});
 
 }
 
@@ -844,18 +996,27 @@ function ubahStatus(i,status){
 
     }else{
 
-        let ket=prompt(
+        tampilkanInputDialog(
             "Masukkan keterangan tidak hadir:",
-            "Tanpa Keterangan"
+            "Tanpa Keterangan",
+            (ket)=>{
+
+                if(!ket){
+
+                    ket="Tanpa Keterangan";
+
+                }
+
+                anggota[i].hadir=false;
+                anggota[i].keterangan=ket.trim();
+
+                simpan();
+                tampilkan();
+
+            }
         );
 
-        if(ket===null){
-            tampilkan();
-            return;
-        }
-
-        anggota[i].hadir=false;
-        anggota[i].keterangan=ket;
+        return;
 
     }
 
@@ -867,21 +1028,25 @@ function ubahStatus(i,status){
 
 function isiKeterangan(i){
 
-let ket=prompt(
+tampilkanInputDialog(
 "Masukkan keterangan tidak hadir:",
-anggota[i].keterangan || ""
-);
+anggota[i].keterangan || "",
+(ket)=>{
 
+if(!ket){
 
-if(ket===null) return;
+ket="Tanpa Keterangan";
 
+}
 
-anggota[i].keterangan=ket;
-
+anggota[i].keterangan=ket.trim();
 
 simpan();
 
 tampilkan();
+
+}
+);
 
 }
 
@@ -990,13 +1155,13 @@ let dipilih=[...document.querySelectorAll(".pilihRiwayat:checked")]
 
 if(dipilih.length==0){
 
-alert("Pilih riwayat yang akan dihapus.");
+notifikasi("Pilih riwayat yang akan dihapus.");
 
 return;
 
 }
 
-if(!confirm("Hapus riwayat yang dipilih?")) return;
+tampilkanKonfirmasi("Hapus riwayat yang dipilih?",()=>{
 
 dipilih.forEach(index=>{
 
@@ -1008,11 +1173,13 @@ simpan();
 
 lihatRiwayat(anggotaDipilih);
 
+});
+
 }
 
 function hapusSemuaRiwayat(){
 
-    if(!confirm("Yakin ingin menghapus seluruh riwayat absensi?")) return;
+    tampilkanKonfirmasi("Yakin ingin menghapus seluruh riwayat absensi?",()=>{
 
     anggota.forEach(a=>{
 
@@ -1022,7 +1189,9 @@ function hapusSemuaRiwayat(){
 
     simpan();
 
-    alert("Seluruh riwayat berhasil dihapus.");
+    notifikasi("Seluruh riwayat berhasil dihapus.");
+
+    });
 
 }
 
@@ -1034,8 +1203,7 @@ document.getElementById("modal").style.display="none";
 
 function refreshAbsensi(){
 
-if(!confirm("Reset semua kehadiran dan keterangan hari ini?")) return;
-
+tampilkanKonfirmasi("Reset semua kehadiran dan keterangan hari ini?",()=>{
 
 anggota.forEach(a=>{
 
@@ -1051,7 +1219,9 @@ simpan();
 tampilkan();
 
 
-alert("Absensi berhasil di-refresh.");
+notifikasi("Absensi berhasil di-refresh.");
+
+});
 
 }
 
@@ -1138,6 +1308,100 @@ document.getElementById("app").style.display="block";
 
 }
 
+function notifikasi(pesan){
+
+document.getElementById("notifText").innerHTML=pesan;
+
+document.getElementById("notif").style.display="flex";
+
+}
+
+let konfirmasiCallback=null;
+let inputDialogCallback=null;
+
+function tampilkanKonfirmasi(pesan,callback){
+
+konfirmasiCallback=callback;
+
+document.getElementById("confirmText").innerHTML=pesan;
+
+document.getElementById("confirm").style.display="flex";
+
+}
+
+function tutupConfirm(){
+
+konfirmasiCallback=null;
+
+document.getElementById("confirm").style.display="none";
+
+}
+
+function konfirmasiYa(){
+
+if(typeof konfirmasiCallback==="function"){
+
+konfirmasiCallback();
+
+}
+
+
+tutupConfirm();
+
+}
+
+function tampilkanInputDialog(title,defaultValue,callback){
+
+inputDialogCallback=callback;
+
+document.getElementById("inputDialogTitle").innerHTML=title;
+
+document.getElementById("inputDialogInput").value=defaultValue || "";
+
+document.getElementById("inputDialog").style.display="flex";
+
+setTimeout(()=>{
+
+const input=document.getElementById("inputDialogInput");
+
+input.focus();
+
+input.select();
+
+},20);
+
+}
+
+function tutupInputDialog(){
+
+inputDialogCallback=null;
+
+document.getElementById("inputDialog").style.display="none";
+
+}
+
+function simpanInputDialog(){
+
+if(typeof inputDialogCallback==="function"){
+
+const value=document.getElementById("inputDialogInput").value;
+
+inputDialogCallback(value);
+
+}
+
+
+tutupInputDialog();
+
+}
+
+
+function tutupNotif(){
+
+document.getElementById("notif").style.display="none";
+
+}
+
 function login(){
 
 let user=document.getElementById("username").value;
@@ -1153,7 +1417,7 @@ document.getElementById("app").style.display="block";
 
 }else{
 
-alert("Username atau Password salah.");
+notifikasi("Username atau Password salah.");
 
 }
 
@@ -1171,3 +1435,4 @@ location.reload();
 
 </body>
 </html>
+
