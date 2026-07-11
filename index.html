@@ -650,7 +650,7 @@ ${!a.hadir ? `
 class="warning"
 onclick="isiKeterangan(${index})">
 
-Isi Keterangan
+${a.keterangan ? a.keterangan : "Isi Keterangan"}
 
 </button>
 
@@ -806,15 +806,6 @@ if(ket===null) return;
 
 
 anggota[i].keterangan=ket;
-
-
-anggota[i].riwayat.push({
-
-tanggal:new Date().toLocaleDateString("id-ID"),
-
-status:"Tidak Hadir - "+ket
-
-});
 
 
 simpan();
