@@ -573,11 +573,10 @@ anggota=defaultAnggota.map(n=>({
 
 nama:n,
 hadir:false,
+keterangan:"",
 riwayat:[]
 
 }));
-
-simpan();
 
 }
 
@@ -706,6 +705,7 @@ anggota.push({
 
 nama:nama,
 hadir:false,
+keterangan:"",
 riwayat:[]
 
 });
@@ -748,14 +748,34 @@ tampilkan();
 
 function ubahStatus(i,status){
 
-    anggota[i].hadir=status;
+    if(status){
+
+        anggota[i].hadir=true;
+
+        anggota[i].keterangan="";
+
+    }else{
+
+        let ket=prompt(
+            "Masukkan keterangan tidak hadir:",
+            "Tanpa Keterangan"
+        );
+
+        if(ket===null){
+            tampilkan();
+            return;
+        }
+
+        anggota[i].hadir=false;
+        anggota[i].keterangan=ket;
+
+    }
 
     simpan();
 
     tampilkan();
 
 }
-
 function checkAll(){
 
     anggota.forEach(a=>a.hadir=true);
@@ -913,13 +933,15 @@ const tanggal=new Date().toLocaleDateString("id-ID",{
 
 anggota.forEach(a=>{
 
-    a.riwayat.push({
+   a.riwayat.push({
 
-        tanggal:tanggal,
+tanggal:tanggal,
 
-        status:a.hadir?"Hadir":"Tidak Hadir"
+status:a.hadir
+?"Hadir"
+:"Tidak Hadir - "+(a.keterangan || "Tanpa Keterangan")
 
-    });
+});
 
 });
 
@@ -945,7 +967,10 @@ i+1,
 
 a.nama,
 
-a.hadir?"Hadir":"Tidak Hadir",
+${a.hadir
+?"Hadir"
+:"Tidak Hadir"+(a.keterangan ? "<br><small>"+a.keterangan+"</small>" : "")
+}
 
 a.riwayat.map(x=>x.tanggal+" - "+x.status).join("\n")
 
