@@ -669,6 +669,14 @@ Refresh Absensi
 
 </button>
 
+<button
+class="info"
+onclick="lihatSemuaRiwayat()">
+
+Riwayat
+
+</button>
+
 </div>
 
 <div class="table-area">
@@ -723,6 +731,33 @@ Tutup
 
 </div>
 
+<div
+class="modal"
+id="modalSemuaRiwayat">
+
+<div class="modal-content" style="max-width:900px;">
+
+<h3>Riwayat Seluruh Anggota</h3>
+
+<div id="semuaRiwayatList"
+style="max-height:500px;overflow:auto;">
+
+</div>
+
+<br>
+
+<button
+class="danger"
+onclick="tutupSemuaRiwayat()">
+
+Tutup
+
+</button>
+
+</div>
+
+</div>
+	
 </div>
 
 </div>
@@ -1142,6 +1177,80 @@ Hapus Riwayat Terpilih
 `;
 
 document.getElementById("riwayatList").innerHTML=html;
+
+}
+
+function lihatSemuaRiwayat(){
+
+document.getElementById("modalSemuaRiwayat").style.display="block";
+
+let html=`
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr>
+
+<th>No</th>
+
+<th>Nama</th>
+
+<th>Riwayat</th>
+
+</tr>
+
+`;
+
+anggota.forEach((a,index)=>{
+
+html+=`
+
+<tr>
+
+<td>${index+1}</td>
+
+<td>${a.nama}</td>
+
+<td>
+
+`;
+
+if(a.riwayat.length==0){
+
+html+="Belum ada riwayat.";
+
+}else{
+
+a.riwayat.forEach(r=>{
+
+html+=`
+<div style="margin-bottom:5px;">
+${r.tanggal} - ${r.status}
+</div>
+`;
+
+});
+
+}
+
+html+=`
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+html+=`</table>`;
+
+document.getElementById("semuaRiwayatList").innerHTML=html;
+
+}
+
+function tutupSemuaRiwayat(){
+
+document.getElementById("modalSemuaRiwayat").style.display="none";
 
 }
 
