@@ -472,6 +472,14 @@ Export Excel
 
 </button>
 
+<button
+class="primary"
+onclick="refreshAbsensi()">
+
+Refresh Absensi
+
+</button>
+
 </div>
 
 <div class="table-area">
@@ -958,6 +966,29 @@ function hapusSemuaRiwayat(){
 function tutupModal(){
 
 document.getElementById("modal").style.display="none";
+
+}
+
+function refreshAbsensi(){
+
+if(!confirm("Reset semua kehadiran dan keterangan hari ini?")) return;
+
+
+anggota.forEach(a=>{
+
+    a.hadir=false;
+
+    a.keterangan="";
+
+});
+
+
+simpan();
+
+tampilkan();
+
+
+alert("Absensi berhasil di-refresh.");
 
 }
 
