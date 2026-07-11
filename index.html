@@ -427,18 +427,30 @@ id="search"
 placeholder="Cari anggota..."
 onkeyup="cari()">
 
+<button
+class="success"
+onclick="tampilkanTambahAnggota()">
+
+Tambah Anggota
+
+</button>
+
+<div id="formTambah" style="display:none; width:100%;">
+
 <input
 type="text"
 id="namaBaru"
-placeholder="Tambah anggota baru">
+placeholder="Masukkan nama anggota baru">
 
 <button
 class="success"
 onclick="tambahAnggota()">
 
-Tambah
+Simpan Anggota
 
 </button>
+
+</div>
 
 <button
 class="primary"
@@ -714,6 +726,22 @@ document.getElementById("tidakCount").innerHTML=anggota.length-hadir;
 
 tampilkan();
 
+function tampilkanTambahAnggota(){
+
+let form=document.getElementById("formTambah");
+
+if(form.style.display==="none"){
+
+    form.style.display="block";
+
+}else{
+
+    form.style.display="none";
+
+}
+
+}
+
 function tambahAnggota(){
 
 let nama=document.getElementById("namaBaru").value.trim();
@@ -736,6 +764,8 @@ riwayat:[]
 });
 
 document.getElementById("namaBaru").value="";
+
+document.getElementById("formTambah").style.display="none";
 
 simpan();
 
