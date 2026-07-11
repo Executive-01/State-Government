@@ -279,9 +279,97 @@ width:100%;
 
 </style>
 
+#loginPage{
+
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0d6efd,#002d72);
+
+}
+
+.login-box{
+
+width:360px;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+text-align:center;
+
+}
+
+.login-box h2{
+
+margin-bottom:10px;
+color:#0d6efd;
+
+}
+
+.login-box p{
+
+margin-bottom:20px;
+color:#666;
+
+}
+
+.login-box input{
+
+width:100%;
+padding:12px;
+margin:8px 0;
+border:1px solid #ccc;
+border-radius:8px;
+
+}
+
+.login-box button{
+
+width:100%;
+margin-top:10px;
+
+}
+
 </head>
 
 <body>
+
+<div id="loginPage">
+
+<div class="login-box">
+
+<h2>LOGIN PANEL</h2>
+
+<p>San Andreas State Government</p>
+
+<input
+type="text"
+id="username"
+placeholder="Username">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button
+class="primary"
+onclick="login()">
+
+LOGIN
+
+</button>
+
+</div>
+
+</div>
+
+<div id="app" style="display:none;">
 
 <div class="container">
 
@@ -324,6 +412,14 @@ Tidak Hadir
 </div>
 
 <div class="toolbar">
+
+<button
+class="danger"
+onclick="logout()">
+
+Logout
+
+</button>
 
 <input
 type="text"
@@ -876,6 +972,44 @@ XLSX.utils.book_append_sheet(wb,ws,"Absensi");
 XLSX.writeFile(wb,"Absensi_SASG.xlsx");
 
 }
+
+</div>
+
+if(localStorage.getItem("login")=="true"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("app").style.display="block";
+
+}
+
+function login(){
+
+let user=document.getElementById("username").value;
+let pass=document.getElementById("password").value;
+
+if(user==="GOV" && pass==="State26"){
+
+localStorage.setItem("login","true");
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("app").style.display="block";
+
+}else{
+
+alert("Username atau Password salah.");
+
+}
+
+}
+
+function logout(){
+
+localStorage.removeItem("login");
+
+location.reload();
+
+                             }
 
 </script>
 
