@@ -333,6 +333,33 @@ margin-top:10px;
 
     }
 
+.search-box{
+
+position:relative;
+flex:1;
+min-width:200px;
+
+}
+
+.search-box input{
+
+width:100%;
+padding:12px 12px 12px 40px;
+border:1px solid #ccc;
+border-radius:8px;
+
+}
+
+.search-icon{
+
+position:absolute;
+left:12px;
+top:50%;
+transform:translateY(-50%);
+font-size:18px;
+
+}
+
 </style>
 
 </head>
@@ -421,11 +448,17 @@ Logout
 
 </button>
 
+<div class="search-box">
+
+<span class="search-icon">🔍</span>
+
 <input
 type="text"
 id="search"
 placeholder="Cari anggota..."
 onkeyup="cari()">
+
+</div>
 
 <button
 class="success"
