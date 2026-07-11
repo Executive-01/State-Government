@@ -635,9 +635,26 @@ onchange="ubahStatus(${index},this.checked)"
 
 <span class="badge ${a.hadir?"hadir":"tidak"}">
 
-${a.hadir?"Hadir":"Tidak Hadir"}
+${a.hadir
+?"Hadir"
+:"Tidak Hadir"+(a.keterangan ? " - "+a.keterangan : "")
+}
 
 </span>
+
+${!a.hadir ? `
+
+<br><br>
+
+<button 
+class="warning"
+onclick="isiKeterangan(${index})">
+
+Isi Keterangan
+
+</button>
+
+`:""}
 
 </td>
 
@@ -776,6 +793,36 @@ function ubahStatus(i,status){
     tampilkan();
 
 }
+
+function isiKeterangan(i){
+
+let ket=prompt(
+"Masukkan keterangan tidak hadir:",
+anggota[i].keterangan || ""
+);
+
+
+if(ket===null) return;
+
+
+anggota[i].keterangan=ket;
+
+
+anggota[i].riwayat.push({
+
+tanggal:new Date().toLocaleDateString("id-ID"),
+
+status:"Tidak Hadir - "+ket
+
+});
+
+
+simpan();
+
+tampilkan();
+
+}
+
 function checkAll(){
 
     anggota.forEach(a=>a.hadir=true);
