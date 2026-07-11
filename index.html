@@ -967,10 +967,9 @@ i+1,
 
 a.nama,
 
-${a.hadir
+a.hadir
 ?"Hadir"
-:"Tidak Hadir"+(a.keterangan ? "<br><small>"+a.keterangan+"</small>" : "")
-}
+:"Tidak Hadir - "+(a.keterangan || "Tanpa Keterangan"),
 
 a.riwayat.map(x=>x.tanggal+" - "+x.status).join("\n")
 
