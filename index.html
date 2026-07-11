@@ -87,16 +87,17 @@ color:#0d6efd;
 .toolbar{
 
 padding:20px;
-display:flex;
-flex-wrap:wrap;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
 gap:10px;
+align-items:start;
 
 }
 
 .toolbar input{
 
-flex:1;
-min-width:200px;
+width:100%;
+min-width:0;
 padding:12px;
 border:1px solid #ccc;
 border-radius:8px;
@@ -229,22 +230,24 @@ background:#dc3545;
 
 display:none;
 position:fixed;
-left:0;
-top:0;
-width:100%;
-height:100%;
+inset:0;
+padding:12px;
 background:rgba(0,0,0,.45);
+z-index:1000;
+overflow:auto;
 
 }
 
 .modal-content{
 
 background:white;
-width:90%;
-max-width:650px;
-margin:60px auto;
+width:min(100%,650px);
+margin:20px auto;
 padding:20px;
 border-radius:12px;
+max-height:calc(100vh - 40px);
+overflow:auto;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
 
 }
 
@@ -261,6 +264,120 @@ overflow:auto;
 
 }
 
+#modalSemuaRiwayat .modal-content{
+
+width:min(100%,1200px);
+max-width:none;
+height:calc(100vh - 24px);
+display:flex;
+flex-direction:column;
+gap:12px;
+
+}
+
+#semuaRiwayatList{
+
+flex:1;
+overflow:auto;
+-webkit-overflow-scrolling:touch;
+background:#f8fbff;
+border:1px solid #dbe4f0;
+border-radius:10px;
+padding:12px;
+
+}
+
+.semua-riwayat-header,
+.semua-riwayat-row{
+	display:grid;
+grid-template-columns:60px minmax(160px,260px) minmax(0,1fr);
+gap:12px;
+align-items:start;
+width:100%;
+min-width:0;
+
+}
+
+.semua-riwayat-header{
+
+background:#0d6efd;
+color:white;
+font-weight:bold;
+padding:10px 12px;
+border-radius:10px 10px 0 0;
+margin-bottom:8px;
+
+}
+
+.semua-riwayat-row{
+
+background:white;
+border:1px solid #e2e8f0;
+border-radius:10px;
+padding:12px;
+margin-bottom:10px;
+
+}
+
+.semua-riwayat-row:last-child{
+
+margin-bottom:0;
+
+}
+
+.semua-riwayat-no,
+.semua-riwayat-nama{
+
+font-weight:bold;
+color:#0d6efd;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+
+}
+
+.semua-riwayat-nama.nama-hijau{
+
+color:#198754;
+
+}
+
+.semua-riwayat-nama.nama-merah{
+
+color:#dc3545;
+
+}
+
+.semua-riwayat-riwayat{
+	display:flex;
+flex-direction:column;
+gap:8px;
+min-width:0;
+
+}
+
+.semua-riwayat-item{
+
+padding:8px 10px;
+border-radius:8px;
+background:#eef6ff;
+border:1px solid #cfe2ff;
+font-size:14px;
+line-height:1.4;
+word-break:break-word;
+overflow-wrap:anywhere;
+
+}
+
+.semua-riwayat-empty{
+
+padding:10px;
+background:#f8f9fa;
+border-radius:8px;
+color:#555;
+
+}
+
 #inputDialogInput{
 
 width:100%;
@@ -271,17 +388,157 @@ border-radius:8px;
 
 }
 
+.aturan-content{
+
+max-width:520px;
+
+}
+
+.aturan-grid{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-bottom:15px;
+
+}
+
+.aturan-grid label,
+.aturan-jenis label{
+	display:flex;
+flex-direction:column;
+gap:8px;
+font-weight:bold;
+color:#333;
+
+}
+
+.aturan-grid input,
+.aturan-grid select{
+
+width:100%;
+padding:10px 12px;
+border:1px solid #ccc;
+border-radius:8px;
+
+}
+
+.aturan-jenis{
+	display:grid;
+grid-template-columns:1fr;
+gap:10px;
+margin-bottom:15px;
+
+}
+
+.aturan-jenis label{
+
+padding:10px 12px;
+border:1px solid #d7e3f6;
+border-radius:8px;
+background:#f7fbff;
+font-weight:normal;
+
+}
+
+.aturan-opsi-row{
+	display:flex;
+align-items:center;
+gap:8px;
+
+}
+
+.aturan-actions{
+	display:flex;
+gap:10px;
+justify-content:flex-end;
+
+}
+
+.aturan-actions button{
+
+flex:1;
+
+}
+
 @media(max-width:700px){
 
-.toolbar{
+.aturan-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.aturan-actions{
 
 flex-direction:column;
 
 }
 
+}
+
+@media(max-width:700px){
+
+body{
+
+padding:8px;
+
+}
+
+.toolbar{
+
+grid-template-columns:repeat(2,minmax(0,1fr));
+
+}
+
+.search-box{
+
+grid-column:1 / -1;
+
+}
+
 button{
 
+width:auto;
+min-height:44px;
+
+}
+
+.modal-content{
+
 width:100%;
+margin:6px auto;
+padding:14px;
+
+}
+
+#modalSemuaRiwayat .modal-content{
+
+width:min(100%,1200px);
+height:calc(100vh - 12px);
+padding:12px;
+
+}
+
+.semua-riwayat-header,
+.semua-riwayat-row{
+
+grid-template-columns:60px 170px minmax(300px,1fr);
+	gap:8px;
+	min-width:640px;
+
+}
+
+.semua-riwayat-header{
+
+border-radius:8px;
+
+}
+
+.semua-riwayat-item{
+
+font-size:13px;
+padding:7px 8px;
 
 }
 
@@ -643,13 +900,13 @@ onclick="uncheckAll()">
 
 Hapus Centang
 
+</button>
+
 <button
 class="danger"
 onclick="hapusSemuaRiwayat()">
 
 Hapus Semua Riwayat
-
-</button>
 
 </button>
 
@@ -741,6 +998,14 @@ id="modalSemuaRiwayat">
 
 <h3>Riwayat Seluruh Anggota</h3>
 
+<div class="aturan-actions" style="margin-bottom:12px;">
+
+<button class="info" onclick="bukaAturan()">Aturan</button>
+
+<button class="danger" onclick="tutupSemuaRiwayat()">Tutup</button>
+
+</div>
+
 <div id="semuaRiwayatList"
 style="max-height:500px;overflow:auto;">
 
@@ -748,13 +1013,89 @@ style="max-height:500px;overflow:auto;">
 
 <br>
 
-<button
-class="danger"
-onclick="tutupSemuaRiwayat()">
+</div>
 
-Tutup
+</div>
 
-</button>
+<div class="modal" id="aturanModal">
+
+<div class="modal-content aturan-content">
+
+<h3>Pengaturan Aturan Riwayat</h3>
+
+<div class="aturan-grid">
+
+<label>
+
+Opsi
+
+<select id="aturanMode" onchange="toggleAturanJumlah()">
+
+<option value="hadir">Hadir</option>
+
+<option value="tidakHadir">Tidak Hadir</option>
+
+</select>
+
+</label>
+
+<label id="aturanJumlahWrap">
+
+Jumlah Tidak Hadir
+
+<input type="number" id="aturanJumlah" min="1" value="3">
+
+</label>
+
+</div>
+
+<div class="aturan-jenis">
+
+<label>
+
+<div class="aturan-opsi-row">
+
+<input type="radio" name="aturanJenis" value="semua" checked>
+
+<span>Semua Tidak Hadir</span>
+
+</div>
+
+</label>
+
+<label>
+
+<div class="aturan-opsi-row">
+
+<input type="radio" name="aturanJenis" value="tanpaKeterangan">
+
+<span>Tidak Hadir Tanpa Keterangan</span>
+
+</div>
+
+</label>
+
+<label>
+
+<div class="aturan-opsi-row">
+
+<input type="radio" name="aturanJenis" value="denganKeterangan">
+
+<span>Tidak Hadir Dengan Keterangan</span>
+
+</div>
+
+</label>
+
+</div>
+
+<div class="aturan-actions">
+
+<button class="success" onclick="terapkanAturan()">Terapkan</button>
+
+<button class="danger" onclick="tutupAturan()">Tutup</button>
+
+</div>
 
 </div>
 
@@ -1029,35 +1370,41 @@ function ubahStatus(i,status){
 
         anggota[i].keterangan="";
 
-    }else{
-
-        tampilkanInputDialog(
-            "Masukkan keterangan tidak hadir:",
-            "Tanpa Keterangan",
-            (ket)=>{
-
-                if(!ket){
-
-                    ket="Tanpa Keterangan";
-
-                }
-
-                anggota[i].hadir=false;
-                anggota[i].keterangan=ket.trim();
-
-                simpan();
-                tampilkan();
-
-            }
-        );
+        simpan();
+        tampilkan();
 
         return;
 
     }
 
-    simpan();
+    tampilkanInputDialog(
+        "Masukkan keterangan tidak hadir:",
+        "Tanpa Keterangan",
+        (ket)=>{
 
-    tampilkan();
+            if(!ket){
+
+                ket="Tanpa Keterangan";
+
+            }
+
+            anggota[i].hadir=false;
+            anggota[i].keterangan=ket.trim();
+
+            simpan();
+            tampilkan();
+
+        },
+        ()=>{
+
+            anggota[i].hadir=true;
+            anggota[i].keterangan="";
+
+            simpan();
+            tampilkan();
+
+        }
+    );
 
 }
 
@@ -1120,6 +1467,81 @@ r.cells[1].innerText.toUpperCase().includes(key)
 }
 
 let anggotaDipilih = -1;
+let aturanRiwayat={
+
+mode:"hadir",
+jumlah:3,
+tipe:"semua"
+
+};
+
+function hitungRiwayatStatus(a){
+
+const normalisasi=(status)=>String(status||"").toLowerCase().trim();
+
+const hadirCount=a.riwayat.filter(r=>normalisasi(r.status).startsWith("hadir")).length;
+const tidakHadirCount=a.riwayat.filter(r=>normalisasi(r.status).startsWith("tidak hadir")).length;
+const tanpaKeteranganCount=a.riwayat.filter(r=>normalisasi(r.status).startsWith("tidak hadir") && normalisasi(r.status).includes("tanpa keterangan")).length;
+const denganKeteranganCount=a.riwayat.filter(r=>normalisasi(r.status).startsWith("tidak hadir") && !normalisasi(r.status).includes("tanpa keterangan")).length;
+
+return {
+
+hadirCount,
+
+tidakHadirCount,
+	tanpaKeteranganCount,
+	denganKeteranganCount
+
+};
+
+}
+
+function toggleAturanJumlah(){
+
+const mode=document.getElementById("aturanMode").value;
+const wrap=document.getElementById("aturanJumlahWrap");
+
+wrap.style.display=mode==="tidakHadir"?"flex":"none";
+
+}
+
+function bukaAturan(){
+
+const mode=document.getElementById("aturanMode");
+const jumlah=document.getElementById("aturanJumlah");
+
+mode.value=aturanRiwayat.mode;
+jumlah.value=aturanRiwayat.jumlah;
+
+const tipe=document.querySelector(`input[name="aturanJenis"][value="${aturanRiwayat.tipe}"]`);
+if(tipe){
+
+tipe.checked=true;
+}
+
+toggleAturanJumlah();
+
+document.getElementById("aturanModal").style.display="block";
+
+}
+
+function tutupAturan(){
+
+document.getElementById("aturanModal").style.display="none";
+
+}
+
+function terapkanAturan(){
+
+aturanRiwayat.mode=document.getElementById("aturanMode").value;
+aturanRiwayat.jumlah=Math.max(1,parseInt(document.getElementById("aturanJumlah").value)||1);
+aturanRiwayat.tipe=document.querySelector("input[name='aturanJenis']:checked")?.value || "semua";
+
+lihatSemuaRiwayat();
+
+tutupAturan();
+
+}
 
 function lihatRiwayat(i){
 
@@ -1181,51 +1603,91 @@ document.getElementById("riwayatList").innerHTML=html;
 }
 
 function lihatSemuaRiwayat(){
-
-document.getElementById("modalSemuaRiwayat").style.display="block";
+	document.getElementById("modalSemuaRiwayat").style.display="block";
 
 let html=`
 
-<table style="width:100%;border-collapse:collapse;">
+<div class="semua-riwayat-header">
 
-<tr>
+<div>No</div>
 
-<th>No</th>
+<div>Nama</div>
 
-<th>Nama</th>
+<div>Riwayat</div>
 
-<th>Riwayat</th>
-
-</tr>
+</div>
 
 `;
 
+let namaHijau=[];
+let namaMerah=[];
+
+if(aturanRiwayat.mode==="hadir"){
+
+const maxHadir=Math.max(...anggota.map(a=>hitungRiwayatStatus(a).hadirCount),0);
+
+namaHijau=anggota.filter(a=>hitungRiwayatStatus(a).hadirCount===maxHadir && maxHadir>0).map(a=>a.nama);
+
+}else{
+
+const hitungStatus=(status)=>{
+
+if(aturanRiwayat.tipe==="tanpaKeterangan"){
+
+return status && status.toLowerCase().includes("tidak hadir") && status.toLowerCase().includes("tanpa keterangan");
+
+}
+
+if(aturanRiwayat.tipe==="denganKeterangan"){
+
+return status && status.toLowerCase().includes("tidak hadir") && !status.toLowerCase().includes("tanpa keterangan");
+
+}
+
+return status && status.toLowerCase().includes("tidak hadir");
+
+};
+
+namaMerah=anggota.filter(a=>{
+
+const count=a.riwayat.filter(r=>hitungStatus(r.status)).length;
+
+return count===aturanRiwayat.jumlah;
+
+}).map(a=>a.nama);
+
+}
+
 anggota.forEach((a,index)=>{
+
+const classNama=aturanRiwayat.mode==="hadir" && namaHijau.includes(a.nama)
+?"semua-riwayat-nama nama-hijau"
+:aturanRiwayat.mode==="tidakHadir" && namaMerah.includes(a.nama)
+?"semua-riwayat-nama nama-merah"
+:"semua-riwayat-nama";
 
 html+=`
 
-<tr>
+<div class="semua-riwayat-row">
 
-<td>${index+1}</td>
+<div class="semua-riwayat-no">${index+1}</div>
 
-<td>${a.nama}</td>
+<div class="${classNama}">${a.nama}</div>
 
-<td>
+<div class="semua-riwayat-riwayat">
 
 `;
 
 if(a.riwayat.length==0){
 
-html+="Belum ada riwayat.";
+html+=`<div class="semua-riwayat-empty">Belum ada riwayat.</div>`;
 
 }else{
 
 a.riwayat.forEach(r=>{
 
 html+=`
-<div style="margin-bottom:5px;">
-${r.tanggal} - ${r.status}
-</div>
+<div class="semua-riwayat-item"><strong>${r.tanggal}</strong> - ${r.status}</div>
 `;
 
 });
@@ -1234,15 +1696,13 @@ ${r.tanggal} - ${r.status}
 
 html+=`
 
-</td>
+</div>
 
-</tr>
+</div>
 
 `;
 
 });
-
-html+=`</table>`;
 
 document.getElementById("semuaRiwayatList").innerHTML=html;
 
@@ -1427,6 +1887,7 @@ document.getElementById("notif").style.display="flex";
 
 let konfirmasiCallback=null;
 let inputDialogCallback=null;
+let inputDialogCancelCallback=null;
 
 function tampilkanKonfirmasi(pesan,callback){
 
@@ -1459,9 +1920,10 @@ tutupConfirm();
 
 }
 
-function tampilkanInputDialog(title,defaultValue,callback){
+function tampilkanInputDialog(title,defaultValue,callback,cancelCallback=null){
 
 inputDialogCallback=callback;
+inputDialogCancelCallback=cancelCallback;
 
 document.getElementById("inputDialogTitle").innerHTML=title;
 
@@ -1483,24 +1945,36 @@ input.select();
 
 function tutupInputDialog(){
 
+const cancelCallback=inputDialogCancelCallback;
+
 inputDialogCallback=null;
+inputDialogCancelCallback=null;
 
 document.getElementById("inputDialog").style.display="none";
+
+if(typeof cancelCallback==="function"){
+
+cancelCallback();
+
+}
 
 }
 
 function simpanInputDialog(){
 
-if(typeof inputDialogCallback==="function"){
-
 const value=document.getElementById("inputDialogInput").value;
+const callback=inputDialogCallback;
 
-inputDialogCallback(value);
+inputDialogCallback=null;
+inputDialogCancelCallback=null;
+
+document.getElementById("inputDialog").style.display="none";
+
+if(typeof callback==="function"){
+
+callback(value);
 
 }
-
-
-tutupInputDialog();
 
 }
 
