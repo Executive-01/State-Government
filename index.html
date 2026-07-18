@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#161a20;
+    color:#fff;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+p{
+    text-align:center;
+    color:#999;
+    margin-bottom:25px;
+}
+
+.menu{
+    display:grid;
+    gap:15px;
+}
+
+.card{
+    background:#232830;
+    border-radius:12px;
+    padding:18px;
+    text-decoration:none;
+    color:#fff;
+    transition:.2s;
+}
+
+.card:hover{
+    background:#2d3440;
+}
+
+.card h2{
+    font-size:20px;
+}
+
+.card span{
+    color:#aaa;
+    font-size:14px;
+}
+
+body{
+    margin:0;
+    background:#161a20;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.topbar{
+    display:flex;
+    align-items:center;
+    padding:15px 20px;
+    background:#1b1f27;
+    border-bottom:1px solid #2f3542;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+}
+
+.logo-area h2{
+    margin:0;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.logo-area p{
+    margin:4px 0 0;
+    color:#9ca3af;
+    font-size:15px;
+}
+
+#loginPage{
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0d6efd,#002d72);
+}
+
+.login-box{
+    width:360px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    text-align:center;
+}
+
+.login-box h2{
+    margin-bottom:10px;
+    color:#0d6efd;
+}
+
+.login-box p{
+    margin-bottom:20px;
+    color:#666;
+}
+
+.login-box input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.login-box button{
+    width:100%;
+    margin-top:10px;
+}
+
+.notif{
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.45);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+}
+
+.notif-box{
+    background:white;
+    width:700px;
+    max-width:95%;
+    max-height:90vh;   /* Batas tinggi */
+    overflow-y:auto;   /* Scroll vertikal */
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+    animation:popup .3s;
+}
+
+.notif-box h3{
+    color:#0d6efd;
+    margin-bottom:10px;
+}
+
+.notif-box p{
+    margin-bottom:20px;
+    color:#555;
+}
+
+.notif-box button{
+    background:#0d6efd;
+    color:white;
+    width:100%;
+}
+
+.notif-actions{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.notif-actions button{
+    flex:1;
+    width:auto;
+}
+
+@keyframes popup{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.notif.show{
+    display:flex;
+}
+
+button{
+    padding:12px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.primary{
+    background:#0d6efd;
+    color:white;
+}
+
+.success{
+    background:#198754;
+    color:white;
+}
+
+.warning{
+    background:#ffc107;
+    color:black;
+}
+
+.danger{
+    background:#dc3545;
+    color:white;
+}
+
+.info{
+    background:#0dcaf0;
+    color:white;
+}
+
+.login-box button{
+    width:100%;
+    margin-top:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+    color:#333;
+}
+
+table th,
+table td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+table th{
+    background:#0d6efd;
+    color:#fff;
+}
+
+table tr:nth-child(even){
+    background:#f5f5f5;
+}
+
+#adminPanel input,
+#adminPanel select{
+    width:100%;
+    padding:12px;
+    margin-bottom:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+#adminPanel table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+}
+
+.action-btn{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    flex-wrap:wrap;
+}
+
+.action-btn button{
+    min-width:70px;
+    padding:8px 12px;
+    font-size:14px;
+}
+
+@media (max-width:600px){
+
+    table{
+        font-size:12px;
+    }
+
+    th,td{
+        padding:6px;
+    }
+
+    .action-btn{
+        flex-direction:column;
+    }
+
+    .action-btn button{
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+
+<header class="topbar">
+    <div class="logo-area">
+        <img src="https://www.upload.ee/image/19554439/logo.png" alt="Logo" class="logo">
+        <div>
+            <h2>State Government</h2>
+            <p>Service, Honor & Country</p>
+        </div>
+    </div>
+</header>
+
+<div id="loginPage">
+    <form id="loginForm" class="login-box" onsubmit="event.preventDefault(); login();">
+        <h2>LOGIN PANEL</h2>
+        <p>San Andreas State Government</p>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Username">
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password">
+
+        <button type="submit" class="primary">
+            LOGIN
+        </button>
+    </form>
+</div>
+
+<div id="app" style="display:none;">
+
+
+<h1>MENU PANEL</h1>
+<p>Pilih halaman</p>
+
+<div class="menu" id="menuList">
+
+</div>
+
+<div id="notif" class="notif">
+    <div class="notif-box">
+        <h3>EXECUTIVE</h3>
+        <p id="notifText"></p>
+        <button onclick="tutupNotif()">OK</button>
+    </div>
+</div>
+
+<button id="adminPanelBtn"
+        class="danger"
+        style="display:none"
+        onclick="bukaAdminPanel()">
+    Admin Panel
+</button>
+
+<div id="adminPanel" class="notif">
+
+    <div class="notif-box" style="width:700px;max-width:95%;">
+
+<h3>ADMIN PANEL</h3>
+
+<div style="display:flex;gap:10px;margin-bottom:20px;">
+    <button class="primary" onclick="showPages()">📄 Pages</button>
+    <button class="success" onclick="showAccount()">👤 Account</button>
+</div>
+
+<!-- ================= PAGE ================= -->
+<div id="pagesMenu">
+
+    <input id="pageTitle" placeholder="Nama Halaman">
+    <br><br>
+
+    <input id="pageUrl" placeholder="URL">
+    <br><br>
+
+<input id="pageDesc" placeholder="Deskripsi Halaman">
+<br><br>
+
+    <input id="pageIcon" placeholder="Icon">
+    <br><br>
+
+    <button class="success" onclick="tambahPage()">
+        Tambah Halaman
+    </button>
+
+    <br><br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>URL</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+
+        <tbody id="pageList"></tbody>
+
+    </table>
+
+</div>
+
+<!-- ================= ACCOUNT ================= -->
+
+<div id="accountMenu" style="display:none;">
+
+    <input id="newUsername" placeholder="Username">
+    <br><br>
+
+    <input id="newPassword" placeholder="Password">
+    <br><br>
+
+    <select id="newRole">
+
+        <option value="admin">Admin</option>
+        <option value="member">Member</option>
+
+    </select>
+
+    <br><br>
+
+    <button class="success" onclick="buatUser()">
+        Tambah Akun
+    </button>
+
+    <br><br>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>No</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Role</th>
+                <th>Aksi</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="userList"></tbody>
+
+    </table>
+
+</div>
+
+<br>
+
+<button class="danger" onclick="tutupAdminPanel()">
+    Tutup
+</button>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+let pages = JSON.parse(localStorage.getItem("pages")) || [
+{
+    title:"State Government",
+    icon:"🏛️",
+    url:"home.html",
+    desc:"Halaman utama"
+},
+{
+    title:"Penal Code",
+    icon:"⚖️",
+    url:"https://executive-01.github.io/PenalCode/",
+    desc:"Penal Code State Side"
+},
+{
+    title:"RollCall",
+    icon:"📑",
+    url:"rollcall.html",
+    desc:"Government Absence"
+},
+{
+    title:"Salary",
+    icon:"💵",
+    url:"https://executive-01.github.io/Salary-Gov/",
+    desc:"Government Salary"
+}
+];
+
+function simpanPages(){
+    localStorage.setItem("pages", JSON.stringify(pages));
+}
+
+function tambahPage(){
+
+    const title=document.getElementById("pageTitle").value.trim();
+    const url=document.getElementById("pageUrl").value.trim();
+    const icon=document.getElementById("pageIcon").value.trim();
+const desc = document.getElementById("pageDesc").value.trim();
+
+    if(title=="" || url==""){
+        notifikasi("Lengkapi data halaman.");
+        return;
+    }
+
+    pages.push({
+    title,
+    url,
+    icon: icon || "📄",
+    desc
+});
+
+document.getElementById("pageDesc").value = "";
+
+    simpanPages();
+
+    tampilkanPages();
+    tampilkanDaftarPages();
+
+    pageTitle.value="";
+    pageUrl.value="";
+    pageIcon.value="";
+}
+
+function editPage(index){
+
+    let title = prompt("Nama Halaman", pages[index].title);
+    if(title===null) return;
+
+    let url = prompt("URL", pages[index].url);
+    if(url===null) return;
+
+    let icon = prompt("Icon", pages[index].icon);
+    if(icon===null) return;
+
+let desc = prompt("Deskripsi", pages[index].desc || "");
+if(desc===null) return;
+
+pages[index].desc = desc;
+    pages[index].title = title;
+    pages[index].url = url;
+    pages[index].icon = icon;
+
+    simpanPages();
+
+    tampilkanPages();
+    tampilkanDaftarPages();
+
+}
+
+function hapusPage(index){
+
+    pages.splice(index,1);
+
+    simpanPages();
+
+    tampilkanPages();
+    tampilkanDaftarPages();
+
+}
+
+function tampilkanPages(){
+
+    const menu = document.getElementById("menuList");
+
+    let html = "";
+
+    pages.forEach((p)=>{
+        html += `
+        <a class="card" href="${p.url}">
+            <h2>${p.icon} ${p.title}</h2>
+            <span>${p.desc || ""}</span>
+        </a>
+        `;
+    });
+
+    if(document.getElementById("adminPanelBtn").style.display !== "none"){
+        html += `
+        <button id="adminPanelBtn"
+            class="danger"
+            onclick="bukaAdminPanel()">
+            Admin Panel
+        </button>`;
+    }
+
+    menu.innerHTML = html;
+}
+
+function tampilkanDaftarPages(){
+
+    let html = "";
+
+    pages.forEach((p,i)=>{
+
+        html += `
+        <tr>
+            <td>${i+1}</td>
+            <td>${p.icon} ${p.title}</td>
+            <td>${p.url}</td>
+            <td>
+                <div class="action-btn">
+                    <button class="warning" onclick="editPage(${i})">
+                        Edit
+                    </button>
+
+                    <button class="danger" onclick="hapusPage(${i})">
+                        Hapus
+                    </button>
+                </div>
+            </td>
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("pageList").innerHTML = html;
+
+}
+
+let users = JSON.parse(localStorage.getItem("users")) || [
+    {
+        username: "STAR",
+        password: "462010B",
+        role: "admin"
+    }
+];
+
+function simpanUsers(){
+    localStorage.setItem("users", JSON.stringify(users));
+}
+
+function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    const user = users.find(u =>
+        u.username === username &&
+        u.password === password
+    );
+
+    if(user){
+
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("app").style.display = "block";
+
+tampilkanPages();
+
+        if(user.role === "admin"){
+            document.getElementById("adminPanelBtn").style.display = "inline-block";
+        }
+
+    }else{
+        notifikasi("Username atau password salah!");
+    }
+}
+
+function bukaAdminPanel(){
+    document.getElementById("adminPanel").classList.add("show");
+    tampilkanUser();
+    tampilkanDaftarPages();
+}
+
+function tutupAdminPanel(){
+    document.getElementById("adminPanel").classList.remove("show");
+}
+
+function hapusUser(index){
+    users.splice(index,1);
+    simpanUsers();
+    tampilkanUser();
+}
+
+function tampilkanUser(){
+
+    let html = "";
+
+    users.forEach((u,i)=>{
+
+     html += `
+<tr>
+    <td>${i+1}</td>
+    <td>${u.username}</td>
+    <td>${u.password}</td>
+    <td>${u.role}</td>
+    <td>
+    <div class="action-btn">
+        <button class="warning" onclick="editUser(${i})">
+             Edit
+        </button>
+
+        <button class="danger" onclick="hapusUser(${i})">
+             Hapus
+        </button>
+    </div>
+</td>
+</tr>
+`;
+
+    });
+
+    document.getElementById("userList").innerHTML = html;
+
+}
+
+function editUser(index){
+
+    let username = prompt("Username", users[index].username);
+    if(username===null) return;
+
+    let password = prompt("Password", users[index].password);
+    if(password===null) return;
+
+    let role = prompt("Role (admin/member)", users[index].role);
+    if(role===null) return;
+
+    users[index].username = username;
+    users[index].password = password;
+    users[index].role = role;
+
+    simpanUsers();
+    tampilkanUser();
+
+}
+
+function buatUser(){
+
+    const username = document.getElementById("newUsername").value.trim();
+    const password = document.getElementById("newPassword").value;
+    const role = document.getElementById("newRole").value;
+
+    if(username==="" || password===""){
+        notifikasi("Username dan Password wajib diisi.");
+        return;
+    }
+
+    users.push({
+        username,
+        password,
+        role
+    });
+
+    simpanUsers();
+
+    document.getElementById("newUsername").value="";
+    document.getElementById("newPassword").value="";
+
+    tampilkanUser();
+
+}
+
+function notifikasi(pesan){
+    document.getElementById("notifText").textContent = pesan;
+    document.getElementById("notif").classList.add("show");
+}
+
+function tutupNotif(){
+    document.getElementById("notif").classList.remove("show");
+}
+
+function showAccount(){
+    document.getElementById("pagesMenu").style.display = "none";
+    document.getElementById("accountMenu").style.display = "block";
+}
+
+function showPages(){
+    document.getElementById("pagesMenu").style.display="block";
+    document.getElementById("accountMenu").style.display="none";
+}
+
+</script>
+
+</div>
+
+</body>
+</html>

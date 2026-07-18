@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>State Government Structure Staff</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#161a20;
+    color:#fff;
+}
+
+header{
+    background:#1d232d;
+    padding:18px;
+    text-align:center;
+    border-bottom:2px solid #2d3748;
+}
+
+header h1{
+    font-size:30px;
+}
+
+header p{
+    margin-top:6px;
+    color:#b7bcc7;
+}
+
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:25px auto;
+}
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+input,
+select{
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+}
+
+button{
+    padding:12px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.primary{
+    background:#0d6efd;
+    color:#fff;
+}
+
+.success{
+    background:#198754;
+    color:#fff;
+}
+
+.warning{
+    background:#ffc107;
+    color:#000;
+}
+
+.danger{
+    background:#dc3545;
+    color:#fff;
+}
+
+.info{
+    background:#0dcaf0;
+    color:#fff;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+    overflow:hidden;
+    border-radius:10px;
+}
+
+th{
+    background:#0d6efd;
+    color:#fff;
+    padding:12px;
+}
+
+td{
+    background:#232830;
+    color:#fff;
+    padding:10px;
+    text-align:center;
+    border-bottom:1px solid #333;
+}
+
+tr:hover td{
+    background:#2b313c;
+}
+
+.action{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.card-group{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#232830;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+}
+
+.card h2{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.card span{
+    font-size:28px;
+    font-weight:bold;
+    color:#0dcaf0;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.55);
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:650px;
+    max-width:95%;
+    max-height:90vh;
+    overflow:auto;
+    background:#1f242d;
+    border-radius:15px;
+    padding:25px;
+}
+
+.modal-box h2{
+    margin-bottom:20px;
+}
+
+.modal-box input,
+.modal-box select{
+    width:100%;
+    margin-bottom:12px;
+}
+
+.search-box{
+    width:320px;
+    max-width:100%;
+}
+
+@media(max-width:700px){
+
+table{
+    font-size:12px;
+}
+
+th,td{
+    padding:8px;
+}
+
+.action{
+    flex-direction:column;
+}
+
+.action button{
+    width:100%;
+}
+
+header h1{
+    font-size:24px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>STATE GOVERNMENT</h1>
+    <p>Structure Staff Management System</p>
+</header>
+
+<div class="container">
+
+    <div class="card-group">
+
+        <div class="card">
+            <h2>Total Member</h2>
+            <span id="totalMember">0</span>
+        </div>
+
+        <div class="card">
+            <h2>Executive</h2>
+            <span id="totalExecutive">0</span>
+        </div>
+
+        <div class="card">
+            <h2>Staff</h2>
+            <span id="totalStaff">0</span>
+        </div>
+
+        <div class="card">
+            <h2>Legislative</h2>
+            <span id="totalLegislative">0</span>
+        </div>
+
+        <div class="card">
+            <h2>Judicial</h2>
+            <span id="totalJudicial">0</span>
+        </div>
+
+        <div class="card">
+            <h2>High Staff</h2>
+            <span id="totalHigh">0</span>
+        </div>
+
+        <div class="card">
+            <h2>Security</h2>
+            <span id="totalSecurity">0</span>
+        </div>
+
+    </div>
+
+    <div class="toolbar">
+
+        <input
+            id="search"
+            class="search-box"
+            type="text"
+            placeholder="Cari Nama..."
+            onkeyup="renderTable()">
+
+        <button
+class="success"
+onclick="openLogin()">
+Admin Panel
+</button>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Rank</th>
+                <th>Divisi</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="tableData">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="modal" id="adminPanel">
+
+<div class="modal-box">
+
+<h2>Admin Panel</h2>
+
+<input
+type="text"
+id="nama"
+placeholder="Nama">
+
+<select id="rank">
+
+<option value="">Pilih Rank</option>
+
+<option>PRESIDENT</option>
+<option>VICE PRESIDENT</option>
+<option>ATTORNEY GENERAL</option>
+<option>CHIEF OF STAFF</option>
+<option>SENIOR EXECUTIVE SERVICE</option>
+
+<option>COUNTY COMMISIONER</option>
+<option>DEPUTY COMMISIONER</option>
+<option>SENIOR STAFF</option>
+<option>JUNIOR STAFF</option>
+<option>INTERNSHIP</option>
+
+<option>PRESIDENT OF SENATE</option>
+<option>SPEAKER OF THE HOUSE</option>
+<option>SENATORS</option>
+<option>REPRESENTATIVE</option>
+
+<option>CHIEF JUSTICE</option>
+<option>COURT OF APPEAL JUDGE</option>
+
+<option>GOVERNOR</option>
+<option>LEUTNANT GOVERNOR</option>
+<option>SECRETARY OF STATE</option>
+<option>MAYOR</option>
+<option>VICE MAYOR</option>
+
+<option>MANAGEMENT GUARD</option>
+<option>COMMANDING OFFICER</option>
+<option>SECRET SERVICE</option>
+<option>SENIOR GUARD</option>
+<option>GOVERNMENT GUARD</option>
+<option>TRAINEE GUARD</option>
+
+</select>
+
+<button
+class="success"
+onclick="saveMember()">
+Tambah Member
+</button>
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+<th>No</th>
+<th>Nama</th>
+<th>Rank</th>
+<th>Aksi</th>
+</tr>
+
+</thead>
+
+<tbody id="adminTable">
+
+</tbody>
+
+</table>
+
+<br>
+
+<button
+class="danger"
+onclick="closeAdmin()">
+Tutup
+</button>
+
+</div>
+
+</div>
+
+<div class="modal" id="loginAdmin">
+
+<div class="modal-box" style="max-width:400px;">
+
+<h2>Admin Login</h2>
+
+<input
+type="text"
+id="adminUser"
+placeholder="Username">
+
+<input
+type="password"
+id="adminPass"
+placeholder="Password">
+
+<button
+class="primary"
+onclick="loginAdmin()">
+Login
+</button>
+
+<br><br>
+
+<button
+class="danger"
+onclick="closeLogin()">
+Batal
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+let members = JSON.parse(localStorage.getItem("government_members")) || [];
+
+let editIndex = -1;
+
+function saveData(){
+    localStorage.setItem(
+        "government_members",
+        JSON.stringify(members)
+    );
+}
+
+function getDivision(rank){
+
+    const executive = [
+        "PRESIDENT",
+        "VICE PRESIDENT",
+        "ATTORNEY GENERAL",
+        "CHIEF OF STAFF",
+        "SENIOR EXECUTIVE SERVICE"
+    ];
+
+    const staff = [
+        "COUNTY COMMISIONER",
+        "DEPUTY COMMISIONER",
+        "SENIOR STAFF",
+        "JUNIOR STAFF",
+        "INTERNSHIP"
+    ];
+
+    const legislative = [
+        "PRESIDENT OF SENATE",
+        "SPEAKER OF THE HOUSE",
+        "SENATORS",
+        "REPRESENTATIVE"
+    ];
+
+    const judicial = [
+        "CHIEF JUSTICE",
+        "COURT OF APPEAL JUDGE"
+    ];
+
+    const highstaff = [
+        "GOVERNOR",
+        "LEUTNANT GOVERNOR",
+        "SECRETARY OF STATE",
+        "MAYOR",
+        "VICE MAYOR"
+    ];
+
+    const security = [
+        "MANAGEMENT GUARD",
+        "COMMANDING OFFICER",
+        "SECRET SERVICE",
+        "SENIOR GUARD",
+        "GOVERNMENT GUARD",
+        "TRAINEE GUARD"
+    ];
+
+    if(executive.includes(rank))
+        return "Executive";
+
+    if(staff.includes(rank))
+        return "Staff";
+
+    if(legislative.includes(rank))
+        return "Legislative";
+
+    if(judicial.includes(rank))
+        return "Judicial";
+
+    if(highstaff.includes(rank))
+        return "High Staff";
+
+    if(security.includes(rank))
+        return "Security";
+
+    return "-";
+}
+
+function openAdmin(){
+    document
+    .getElementById("adminPanel")
+    .classList.add("show");
+
+    renderAdmin();
+}
+
+function closeAdmin(){
+
+    document
+    .getElementById("adminPanel")
+    .classList.remove("show");
+
+    document.getElementById("nama").value="";
+    document.getElementById("rank").value="";
+
+    editIndex=-1;
+
+}
+
+function saveMember(){
+
+    const nama = document.getElementById("nama").value.trim();
+    const rank = document.getElementById("rank").value;
+
+    if(nama==="" || rank===""){
+        alert("Lengkapi Nama dan Rank.");
+        return;
+    }
+
+    const data = {
+        nama: nama,
+        rank: rank,
+        division: getDivision(rank)
+    };
+
+    if(editIndex==-1){
+        members.push(data);
+    }else{
+        members[editIndex]=data;
+        editIndex=-1;
+    }
+
+    saveData();
+
+    document.getElementById("nama").value="";
+    document.getElementById("rank").value="";
+
+    renderAdmin();
+    renderTable();
+}
+
+function editMember(index){
+
+    document.getElementById("nama").value =
+        members[index].nama;
+
+    document.getElementById("rank").value =
+        members[index].rank;
+
+    editIndex=index;
+
+}
+
+function deleteMember(index){
+
+    if(!confirm("Hapus member ini?"))
+        return;
+
+    members.splice(index,1);
+
+    saveData();
+
+    renderAdmin();
+    renderTable();
+
+}
+
+function renderAdmin(){
+
+    let html="";
+
+    members.forEach((m,i)=>{
+
+        html += `
+        <tr>
+
+            <td>${i+1}</td>
+
+            <td>${m.nama}</td>
+
+            <td>${m.rank}</td>
+
+            <td>
+
+                <div class="action">
+
+                    <button
+                    class="warning"
+                    onclick="editMember(${i})">
+                    Edit
+                    </button>
+
+                    <button
+                    class="danger"
+                    onclick="deleteMember(${i})">
+                    Hapus
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("adminTable").innerHTML=html;
+
+}
+
+function openLogin(){
+
+    document
+    .getElementById("loginAdmin")
+    .classList.add("show");
+
+}
+
+function closeLogin(){
+
+    document
+    .getElementById("loginAdmin")
+    .classList.remove("show");
+
+    document.getElementById("adminUser").value="";
+    document.getElementById("adminPass").value="";
+
+}
+
+function loginAdmin(){
+
+    const username =
+    document.getElementById("adminUser").value.trim();
+
+    const password =
+    document.getElementById("adminPass").value;
+
+    if(username==="GOV" && password==="state26"){
+
+        closeLogin();
+
+        document
+        .getElementById("adminPanel")
+        .classList.add("show");
+
+        renderAdmin();
+
+    }else{
+
+        alert("Username atau Password salah.");
+
+    }
+
+}
+
+function renderTable(){
+
+    const keyword = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+    let html = "";
+
+    let executive = 0;
+    let staff = 0;
+    let legislative = 0;
+    let judicial = 0;
+    let high = 0;
+    let security = 0;
+
+    let no = 1;
+
+const urutanDivisi = {
+    "Executive": 1,
+    "Legislative": 2,
+    "Judicial": 3,
+    "High Staff": 4,
+    "Staff": 5,
+    "Security": 6
+};
+
+const urutanRank = [
+
+"PRESIDENT",
+"VICE PRESIDENT",
+"ATTORNEY GENERAL",
+"CHIEF OF STAFF",
+"SENIOR EXECUTIVE SERVICE",
+
+"PRESIDENT OF SENATE",
+"SPEAKER OF THE HOUSE",
+"SENATORS",
+"REPRESENTATIVE",
+
+"CHIEF JUSTICE",
+"COURT OF APPEAL JUDGE",
+
+"GOVERNOR",
+"LEUTNANT GOVERNOR",
+"SECRETARY OF STATE",
+"MAYOR",
+"VICE MAYOR",
+
+"COUNTY COMMISIONER",
+"DEPUTY COMMISIONER",
+"SENIOR STAFF",
+"JUNIOR STAFF",
+"INTERNSHIP",
+
+"MANAGEMENT GUARD",
+"COMMANDING OFFICER",
+"SECRET SERVICE",
+"SENIOR GUARD",
+"GOVERNMENT GUARD",
+"TRAINEE GUARD"
+
+];
+
+
+const sortedMembers = [...members].sort((a,b)=>{
+
+    if(urutanDivisi[a.division] !== urutanDivisi[b.division]){
+        return urutanDivisi[a.division] - urutanDivisi[b.division];
+    }
+
+    return urutanRank.indexOf(a.rank) - urutanRank.indexOf(b.rank);
+
+});
+
+    sortedMembers.forEach((m)=>{
+
+        switch(m.division){
+
+            case "Executive":
+                executive++;
+                break;
+
+            case "Staff":
+                staff++;
+                break;
+
+            case "Legislative":
+                legislative++;
+                break;
+
+            case "Judicial":
+                judicial++;
+                break;
+
+            case "High Staff":
+                high++;
+                break;
+
+            case "Security":
+                security++;
+                break;
+
+        }
+
+        if(
+            m.nama.toLowerCase().includes(keyword) ||
+            m.rank.toLowerCase().includes(keyword)
+        ){
+
+            html += `
+            <tr>
+
+                <td>${no++}</td>
+
+                <td>${m.nama}</td>
+
+                <td>${m.rank}</td>
+
+                <td>${m.division}</td>
+
+            </tr>
+            `;
+
+        }
+
+    });
+
+    document.getElementById("tableData").innerHTML = html;
+
+    document.getElementById("totalMember").textContent = members.length;
+    document.getElementById("totalExecutive").textContent = executive;
+    document.getElementById("totalStaff").textContent = staff;
+    document.getElementById("totalLegislative").textContent = legislative;
+    document.getElementById("totalJudicial").textContent = judicial;
+    document.getElementById("totalHigh").textContent = high;
+    document.getElementById("totalSecurity").textContent = security;
+
+}
+
+renderTable();
+renderAdmin();
+
+</script>
+
+</body>
+</html>
